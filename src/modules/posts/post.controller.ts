@@ -2,6 +2,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PostService } from './post.service';
 import { Post as PostModel } from '@prisma/client';
+import { PostCreateDto } from './post.dto';
 
 @ApiTags('posts')
 @Controller('/posts')
@@ -14,11 +15,11 @@ export class PostController {
     }
 
     @Get('post/:id')
-    async getPostById(@Param('id') id: string): Promise<PostModel> {
+    async getPostById(@Param('id') id: string): Promise<PostModel | null> {
         return this.postService.post({ id: +id });
     }
 
-    @Post('filtered-posts/:searchString')
+    @Get('filtered-posts/:searchString')
     async getFilteredPosts(@Param('searchString') searchString: string): Promise<PostModel[]> {
         return this.postService.posts({
             where: {
@@ -35,9 +36,7 @@ export class PostController {
     }
 
     @Post('post')
-    async createDraft(
-        @Body() postData: { title: string; content?: string; authorEmail: string },
-    ): Promise<PostModel> {
+    async createDraft(@Body() postData: PostCreateDto): Promise<PostModel> {
         const { title, content, authorEmail } = postData;
         return this.postService.createPost({
             title,
