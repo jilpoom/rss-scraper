@@ -18,7 +18,6 @@ export class AuthController {
     @UseGuards(AuthGuard)
     @Get('profile')
     async getProfile(@Req() req) {
-        // console.log(req);
         return req.user;
     }
 }
