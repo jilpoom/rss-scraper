@@ -10,3 +10,11 @@ export class UserCreateDTO {
     @ApiProperty()
     password: string;
 }
+
+export class UserPasswordChangeDTO {
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
+    password: string;
+}
