@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { SignInDTO } from './auth.dto';
 import { AuthService } from './auth.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from './auth.guard';
 
 @ApiTags('auths')
 @Controller('/auths')
@@ -11,5 +12,13 @@ export class AuthController {
     @Post('/signIn')
     async signIn(@Body() signInDTO: SignInDTO) {
         return this.authService.signIn(signInDTO);
+    }
+
+    @ApiBearerAuth('access-key')
+    @UseGuards(AuthGuard)
+    @Get('profile')
+    async getProfile(@Req() req) {
+        // console.log(req);
+        return req.user;
     }
 }

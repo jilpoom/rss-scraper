@@ -45,3 +45,4 @@ npm run start:prod
 | 5   | `posts`, `users` 모듈화 및 Swagger 태깅 | 2024-05-09 | master       |
 | 6   | `posts` 테스트 코드 작성                 | 2024-05-09 | master       |
 | 7   | `auth` 모듈 생성                      | 2024-05-10 | feature/auth |
+| 8   | JWT Access Token 부여               | 2024-05-10 | feature/auth |
