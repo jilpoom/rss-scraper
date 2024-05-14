@@ -43,10 +43,11 @@ npm run start:prod
 | 3   | Prisma Migrate Scripts 작성             | 2024-05-08 | master          |
 | 4   | `src` 디렉토리 구조 변경                      | 2024-05-08 | master          |
 | 5   | `posts`, `users` 모듈화 및 Swagger 태깅     | 2024-05-09 | master          |
-| 6   | `posts` 테스트 코드 작성                     | 2024-05-09 | master          |
+| 6   | `PostController` 테스트 코드 작성            | 2024-05-09 | master          |
 | 7   | `auth` 모듈 생성                          | 2024-05-10 | feature/auth    |
 | 8   | JWT Access Token 부여                   | 2024-05-10 | feature/auth    |
 | 9   | user 비밀번호 단방향 암호화                     | 2024-05-10 | feature/bcrypto |
 | 10  | cors, helmet, morgan 적용               | 2024-05-10 | feature/cors    |
-| 11  | `users` 테스트 코드 작성                     | 2024-05-14 | feature/user    |
+| 11  | UserController 테스트 코드 작성              | 2024-05-14 | feature/user    |
 | 12  | 테스트 파일 `modules/__test__/` 디렉토리 하위 종속 | 2024-05-14 | architect/test  |
+| 13  | `PostService` 테스트 코드 작성               | 2024-05-14 | feature/post    |
