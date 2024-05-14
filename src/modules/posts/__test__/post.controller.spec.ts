@@ -91,5 +91,11 @@ describe('PostController - PostService', () => {
         expect(await postController.publishPost('1')).toStrictEqual(published_post);
     });
 
-    //TODO: deletePost Test
+    test('deletePost', async () => {
+        const id: string = '1';
+
+        postServiceMock.deletePost.mockResolvedValueOnce(dum[0]);
+
+        expect(await postController.deletePost(id)).toStrictEqual(dum[0]);
+    });
 });
