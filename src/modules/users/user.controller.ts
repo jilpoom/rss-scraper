@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User as UserModel } from '@prisma/client';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -9,6 +9,32 @@ import { AuthGuard } from '../../auth/auth.guard';
 @Controller('/users')
 export class UserController {
     constructor(private readonly userService: UserService) {}
+
+    @Get('/')
+    async getAllUsers(): Promise<UserModel[]> {
+        return this.userService.users({});
+    }
+
+    @Get('/user/:id')
+    async getUserById(id: string): Promise<UserModel> {
+        return this.userService.user({ id: +id });
+    }
+
+    @Get('/user/filtered-users/:searchString')
+    async getFilteredUsers(@Param('searchString') searchString: string): Promise<UserModel[]> {
+        return this.userService.users({
+            where: {
+                OR: [
+                    {
+                        name: { contains: searchString },
+                    },
+                    {
+                        email: { contains: searchString },
+                    },
+                ],
+            },
+        });
+    }
 
     @Post('user')
     async signupUser(@Body() userData: UserCreateDTO): Promise<UserModel> {
@@ -23,4 +49,6 @@ export class UserController {
 
         return this.userService.updateUser({ where: { id: +id }, data });
     }
+
+
 }
