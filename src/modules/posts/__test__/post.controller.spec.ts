@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Post } from '@prisma/client';
-import { PostController } from './post.controller';
-import { PostService } from './post.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { PostController } from '../post.controller';
+import { PostService } from '../post.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { DeepMockProxy, mock } from 'jest-mock-extended';
-import { PostCreateDto } from './post.dto';
+import { PostCreateDto } from '../post.dto';
 
 describe('PostController - PostService', () => {
     let postController: PostController;
@@ -26,7 +26,7 @@ describe('PostController - PostService', () => {
         },
     ];
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             controllers: [PostController],
             providers: [PostService, PrismaService],
@@ -38,13 +38,13 @@ describe('PostController - PostService', () => {
         postController = moduleFixture.get<PostController>(PostController);
     });
 
-    it('getAllPosts', async () => {
+    test('getAllPosts', async () => {
         postServiceMock.posts.mockResolvedValueOnce(dum);
 
         expect(await postController.getAllPosts()).toBe(dum);
     });
 
-    it('getPostById', async () => {
+    test('getPostById', async () => {
         postServiceMock.post.mockImplementationOnce(async ({ id }): Promise<Post> => {
             return dum.filter((d) => d.id === id)[0];
         });
@@ -52,13 +52,13 @@ describe('PostController - PostService', () => {
         expect(await postController.getPostById('1')).toBe(dum[0]);
     });
 
-    it('getFilteredPosts', async () => {
+    test('getFilteredPosts', async () => {
         postServiceMock.posts.mockResolvedValueOnce([dum[0]]);
 
         expect(await postController.getFilteredPosts('search')).toStrictEqual([dum[0]]);
     });
 
-    it('createDraft', async () => {
+    test('createDraft', async () => {
         const new_post_dto: PostCreateDto = {
             title: 'new title',
             content: 'new content',
@@ -77,7 +77,7 @@ describe('PostController - PostService', () => {
         expect(await postController.createDraft(new_post_dto)).toStrictEqual(new_post);
     });
 
-    it('publishPost', async () => {
+    test('publishPost', async () => {
         const published_post: Post = {
             title: 'test title',
             content: 'test content',
