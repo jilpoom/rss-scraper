@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class BcryptService {
     hash(password: string): Promise<string> {
-        const salt = +process.env.BCRYPT_SALT_ROUNDS;
+        const salt = +process.env.BCRYPT_SALT_ROUNDS!;
         return bcrypt.hash(password, salt);
     }
 

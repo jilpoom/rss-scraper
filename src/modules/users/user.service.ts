@@ -10,10 +10,16 @@ export class UserService {
         private bcrypt: BcryptService,
     ) {}
 
-    async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null> {
-        return this.prisma.user.findUnique({
+    async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User> {
+        const user = await this.prisma.user.findUnique({
             where: userWhereUniqueInput,
         });
+
+        if (!user) {
+            throw new Error('해당 user가 없습니다.');
+        }
+
+        return user;
     }
 
     async users(params: {
@@ -34,7 +40,9 @@ export class UserService {
     }
 
     async createUser(data: Prisma.UserCreateInput): Promise<User> {
-        data.password = await this.bcrypt.hash(data.password);
+        if (data.password != null) {
+            data.password = await this.bcrypt.hash(data.password);
+        }
 
         return this.prisma.user.create({
             data,
