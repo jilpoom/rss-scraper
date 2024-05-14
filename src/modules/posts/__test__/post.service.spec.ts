@@ -6,7 +6,7 @@ import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { Post as PostModel } from '@prisma/client';
 import { PostSearchDTO, PostUpdateDTO } from '../post.dto';
 
-describe('PostController', () => {
+describe('PostService', () => {
     let postService: PostService;
     let prismaServiceMock: DeepMockProxy<PrismaClient>;
 
@@ -27,7 +27,7 @@ describe('PostController', () => {
         },
     ];
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             controllers: [],
             providers: [PostService, PrismaService],
