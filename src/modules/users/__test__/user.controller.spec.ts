@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DeepMockProxy, mock } from 'jest-mock-extended';
-import { UserService } from './user.service';
-import { PrismaService } from '../prisma/prisma.service';
-import { UserController } from './user.controller';
+import { UserService } from '../user.service';
+import { PrismaService } from '../../prisma/prisma.service';
+import { UserController } from '../user.controller';
 import { User as UserModel } from '@prisma/client';
-import { BcryptService } from './bcrypt/bcrypt.service';
+import { BcryptService } from '../bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
-import { UserCreateDTO, UserPasswordChangeDTO } from './user.dto';
-import { UserModule } from './user.module';
+import { UserCreateDTO, UserPasswordChangeDTO } from '../user.dto';
+import { UserModule } from '../user.module';
 
 describe('UserController', () => {
     let userController: UserController;
@@ -39,25 +39,25 @@ describe('UserController', () => {
         userController = moduleFixture.get<UserController>(UserController);
     });
 
-    it('getAllUsers', async () => {
+    test('getAllUsers', async () => {
         userServiceMock.users.mockResolvedValueOnce(dum);
 
         expect(await userController.getAllUsers()).toStrictEqual(dum);
     });
 
-    it('getUserById', async () => {
+    test('getUserById', async () => {
         userServiceMock.user.mockResolvedValueOnce(dum[0]);
 
         expect(await userController.getUserById('1')).toStrictEqual(dum[0]);
     });
 
-    it('getFilteredUsers', async () => {
+    test('getFilteredUsers', async () => {
         userServiceMock.users.mockResolvedValueOnce([dum[0]]);
 
         expect(await userController.getFilteredUsers('JJY')).toStrictEqual([dum[0]]);
     });
 
-    it('signupUser', async () => {
+    test('signupUser', async () => {
         const userCreateDTO: UserCreateDTO = {
             name: 'jjy',
             email: 'jjy@naver.com',
@@ -76,7 +76,7 @@ describe('UserController', () => {
         expect(await userController.signupUser(userCreateDTO)).toStrictEqual(userResponseDTO);
     });
 
-    it('change-password', async () => {
+    test('change-password', async () => {
         const userPasswordChangeDTO: UserPasswordChangeDTO = {
             id: '1',
             password: '1234',

@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaClient } from '@prisma/client';
-import { PostService } from './post.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { PostService } from '../post.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 
 describe('PostController', () => {
     let postService: PostService;
     let mockPrisma: DeepMockProxy<PrismaClient>;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             controllers: [],
             providers: [PostService, PrismaService],

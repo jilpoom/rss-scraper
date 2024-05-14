@@ -49,6 +49,4 @@ export class UserController {
 
         return this.userService.updateUser({ where: { id: +id }, data });
     }
-
-
 }

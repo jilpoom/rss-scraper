@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from '../app.controller';
+import { AppService } from '../app.service';
 
 describe('AppController', () => {
     let app: AppController;
@@ -14,7 +14,7 @@ describe('AppController', () => {
         app = moduleFixture.get<AppController>(AppController);
     });
 
-    it('health-check should return "Hello World!"', () => {
+    test('health-check should return "Hello World!"', () => {
         expect(app.checkAppHealth()).toBe('Hello World!');
     });
 });
