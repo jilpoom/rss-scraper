@@ -21,5 +21,6 @@ describe('PostController', () => {
         mockPrisma = moduleFixture.get(PrismaService);
     });
 
+    //TODO: PostService 유닛 테스트 코드 작성
     it('dummy', () => {});
 });
