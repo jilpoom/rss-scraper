@@ -48,3 +48,4 @@ npm run start:prod
 | 8   | JWT Access Token 부여               | 2024-05-10 | feature/auth    |
 | 9   | user 비밀번호 단방향 암호화                 | 2024-05-10 | feature/bcrypto |
 | 10  | cors, helmet, morgan 적용           | 2024-05-10 | feature/cors    |
+| 11  | `users` 테스트 코드 작성                 | 2024-05-14 | feature/user    |
