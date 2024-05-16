@@ -1,13 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { IsNotEmpty } from 'class-validator';
 
 export class PostCreateDto {
+    @IsNotEmpty({
+        message: '제목을 입력해주세요.',
+    })
     @ApiProperty()
     title: string;
 
     @ApiProperty()
     content?: string;
 
+    @IsNotEmpty()
     @ApiProperty()
     authorEmail: string;
 }
