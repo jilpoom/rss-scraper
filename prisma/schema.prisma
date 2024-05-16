@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  password String  @default("0000")
-  posts    Post[]
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String   @default("0000")
+  create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+  posts     Post[]
 }
 
 model Post {
@@ -27,5 +28,6 @@ model Post {
   content   String?
   published Boolean? @default(false)
   author    User?    @relation(fields: [authorId], references: [id])
+  create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
   authorId  Int?
 }

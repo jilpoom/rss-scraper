@@ -7,23 +7,24 @@ import { User as UserModel } from '@prisma/client';
 import { BcryptService } from '../bcrypt/bcrypt.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserCreateDTO, UserPasswordChangeDTO } from '../user.dto';
-import { UserModule } from '../user.module';
 
 describe('UserController', () => {
     let userController: UserController;
-    let userServiceMock: DeepMockProxy<UserService> = mock<UserService>();
+    const userServiceMock: DeepMockProxy<UserService> = mock<UserService>();
     const dum: UserModel[] = [
         {
             id: 1,
             name: 'JJY',
             email: 'JJY@google.com',
             password: '1234',
+            create_at: new Date(),
         },
         {
             id: 2,
             name: 'KKY',
             email: 'KKY@google.com',
             password: '2345',
+            create_at: new Date(),
         },
     ];
 
@@ -64,16 +65,9 @@ describe('UserController', () => {
             password: '1234',
         };
 
-        const userResponseDTO: UserModel = {
-            id: 3,
-            name: 'jjy',
-            email: 'jjy@naver.com',
-            password: 'crypted-password',
-        };
+        userServiceMock.createUser.mockResolvedValueOnce(dum[0]);
 
-        userServiceMock.createUser.mockResolvedValueOnce(userResponseDTO);
-
-        expect(await userController.signupUser(userCreateDTO)).toStrictEqual(userResponseDTO);
+        expect(await userController.signupUser(userCreateDTO)).toStrictEqual(dum[0]);
     });
 
     test('change-password', async () => {
@@ -85,5 +79,5 @@ describe('UserController', () => {
         userServiceMock.updateUser.mockResolvedValueOnce(dum[0]);
 
         expect(await userController.changePassword(userPasswordChangeDTO)).toStrictEqual(dum[0]);
-    })
+    });
 });

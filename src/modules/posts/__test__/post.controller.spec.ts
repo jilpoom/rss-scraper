@@ -16,6 +16,7 @@ describe('PostController - PostService', () => {
             id: 1,
             authorId: 1,
             published: false,
+            create_at: new Date(),
         },
         {
             title: 'test title',
@@ -23,6 +24,7 @@ describe('PostController - PostService', () => {
             id: 2,
             authorId: 1,
             published: true,
+            create_at: new Date(),
         },
     ];
 
@@ -65,30 +67,14 @@ describe('PostController - PostService', () => {
             authorEmail: 'new@new.com',
         };
 
-        const new_post: Post = {
-            id: 3,
-            title: 'new title',
-            content: 'new content',
-            authorId: 2,
-            published: false,
-        };
-
-        postServiceMock.createPost.mockResolvedValueOnce(new_post);
-        expect(await postController.createDraft(new_post_dto)).toStrictEqual(new_post);
+        postServiceMock.createPost.mockResolvedValueOnce(dum[0]);
+        expect(await postController.createDraft(new_post_dto)).toStrictEqual(dum[0]);
     });
 
     test('publishPost', async () => {
-        const published_post: Post = {
-            title: 'test title',
-            content: 'test content',
-            id: 2,
-            authorId: 1,
-            published: true,
-        };
+        postServiceMock.updatePost.mockResolvedValueOnce(dum[0]);
 
-        postServiceMock.updatePost.mockResolvedValueOnce(published_post);
-
-        expect(await postController.publishPost('1')).toStrictEqual(published_post);
+        expect(await postController.publishPost('1')).toStrictEqual(dum[0]);
     });
 
     test('deletePost', async () => {
