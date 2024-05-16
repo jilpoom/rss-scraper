@@ -3,6 +3,7 @@ import { AppModule } from './modules/app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import * as morgan from 'morgan';
+import { ValidationPipe } from '@nestjs/common';
 
 const swagger_config = new DocumentBuilder()
     .setTitle('nest-fake-api')
@@ -22,10 +23,17 @@ const swagger_config = new DocumentBuilder()
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    // CORS
     app.enableCors();
+
+    // helmet
     app.use(helmet());
     app.use(helmet.hidePoweredBy());
     app.use(helmet.xssFilter());
+
+    // ValidationPipe
+    app.useGlobalPipes(new ValidationPipe());
 
     if (process.env.ENV === 'dev') {
         app.use(morgan('dev'));
