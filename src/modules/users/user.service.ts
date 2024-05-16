@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 import { BcryptService } from './bcrypt/bcrypt.service';
+import { UserSearchDTO, UserUpdateDTO } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -22,13 +23,7 @@ export class UserService {
         return user;
     }
 
-    async users(params: {
-        skip?: number;
-        take?: number;
-        cursor?: Prisma.UserWhereUniqueInput;
-        where?: Prisma.UserWhereInput;
-        orderBy?: Prisma.UserOrderByWithRelationInput;
-    }): Promise<User[]> {
+    async users(params: UserSearchDTO): Promise<User[]> {
         const { skip, take, cursor, where, orderBy } = params;
         return this.prisma.user.findMany({
             skip,
@@ -40,24 +35,25 @@ export class UserService {
     }
 
     async createUser(data: Prisma.UserCreateInput): Promise<User> {
-        if (data.password != null) {
-            data.password = await this.bcrypt.hash(data.password);
+        if (!data.password) {
+            throw new Error('패스워드를 입력해주세요');
         }
+
+        data.password = await this.bcrypt.hash(data.password);
 
         return this.prisma.user.create({
             data,
         });
     }
 
-    async updateUser(params: {
-        where: Prisma.UserWhereUniqueInput;
-        data: Prisma.UserUpdateInput;
-    }): Promise<User> {
+    async updateUser(params: UserUpdateDTO): Promise<User> {
         const { where, data } = params;
 
-        if (typeof data.password === 'string') {
-            data.password = await this.bcrypt.hash(data.password);
+        if (!data.password) {
+            throw new Error('패스워드를 입력해주세요');
         }
+
+        data.password = await this.bcrypt.hash(data.password as string);
 
         return this.prisma.user.update({
             where,
