@@ -52,3 +52,4 @@ npm run start:prod
 | 12  | 테스트 파일 `modules/__test__/` 디렉토리 하위 종속 | 2024-05-14 | architect/test  |
 | 13  | `PostService` 테스트 코드 작성               | 2024-05-14 | feature/post    |
 | 14  | `AppModule`, `AppService` 테스트 코드 작성   | 2024-05-14 | feature/app     |
+| 15  | `UserService` 테스트 코드 작성               | 2024-05-16 | feature/user    | 
