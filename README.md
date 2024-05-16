@@ -54,3 +54,4 @@ npm run start:prod
 | 14  | `AppModule`, `AppService` 테스트 코드 작성   | 2024-05-14 | feature/app      |
 | 15  | `UserService` 테스트 코드 작성               | 2024-05-16 | feature/user     |
 | 16  | `class-validator` Request DTO 유효성 검사  | 2024-05-16 | feature/validate |
+| 17  | `User`, `Post` 모델에 `create_at` 칼럼 추가  | 2024-05-16 | feature/domain   | 
