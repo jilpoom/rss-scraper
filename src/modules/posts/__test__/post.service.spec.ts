@@ -17,6 +17,7 @@ describe('PostService', () => {
             id: 1,
             authorId: 1,
             published: false,
+            create_at: new Date(),
         },
         {
             title: 'test title',
@@ -24,6 +25,7 @@ describe('PostService', () => {
             id: 2,
             authorId: 1,
             published: true,
+            create_at: new Date(),
         },
     ];
 

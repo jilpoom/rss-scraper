@@ -1,7 +1,5 @@
 import { AppService } from '../app.service';
-import { mock } from 'jest-mock-extended';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from '../app.controller';
 
 describe('AppService', () => {
     let appService: AppService;

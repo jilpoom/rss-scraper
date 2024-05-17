@@ -17,12 +17,14 @@ describe('UserService', () => {
             name: 'JJY',
             email: 'JJY@google.com',
             password: '1234',
+            create_at: new Date(),
         },
         {
             id: 2,
             name: 'KKY',
             email: 'KKY@google.com',
             password: '2345',
+            create_at: new Date(),
         },
     ];
 
