@@ -51,15 +51,21 @@ ENV="dev"
 
 ```shell
 # 테스트 실행
-> npm test
+> npm run test
 
 # 테스트 커버리지 문서화
-> npm test:cov
+> npm run test:cov
 ```
 
 > 현재 유닛 테스트만 작성되어 있으며, 추후 통합 테스트를 작성할 예정입니다.
 
-6. 다음의 명령어를 통해, 프로젝트를 실행하고, 다음 주소를 통해 Swagger UI에 접근할 수 있습니다.
+6. 다음의 명령어를 통해, 프로젝트를 실행하세요
+
+```shell
+> npm run start:dev
+```
+
+7. 다음 주소를 통해 Swagger UI에 접근할 수 있습니다.
 
 ```shell
 http://localhost:3000/api
