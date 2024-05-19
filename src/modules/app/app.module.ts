@@ -5,6 +5,7 @@ import { PostModule } from '../posts/post.module';
 import { UserModule } from '../users/user.module';
 import { AuthModule } from '../../auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ScraperModule } from '../scraper/scraper.module';
 import { APP_PIPE } from '@nestjs/core';
 
 @Module({
@@ -16,6 +17,7 @@ import { APP_PIPE } from '@nestjs/core';
         PostModule,
         UserModule,
         AuthModule,
+        ScraperModule,
     ],
     controllers: [AppController],
     providers: [

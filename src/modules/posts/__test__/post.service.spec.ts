@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { PostService } from '../post.service';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { Post as PostModel } from '@prisma/client';
 import { PostSearchDTO, PostUpdateDTO } from '../post.dto';

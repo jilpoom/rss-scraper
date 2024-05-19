@@ -2,7 +2,7 @@ import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { UserService } from '../user.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { BcryptService } from '../bcrypt/bcrypt.service';
 import { User as UserModel } from '.prisma/client';
 import { UserCreateDTO, UserSearchDTO, UserUpdateDTO } from '../user.dto';
