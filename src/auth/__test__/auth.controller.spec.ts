@@ -3,7 +3,7 @@ import { DeepMockProxy, mock } from 'jest-mock-extended';
 import { AuthService } from '../auth.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from '../../modules/users/user.service';
-import { PrismaService } from '../../modules/prisma/prisma.service';
+import { PrismaService } from '../../modules/common/prisma/prisma.service';
 import { AuthGuard } from '../auth.guard';
 import { BcryptService } from '../../modules/users/bcrypt/bcrypt.service';
 import { JwtModule } from '@nestjs/jwt';

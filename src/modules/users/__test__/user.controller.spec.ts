@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DeepMockProxy, mock } from 'jest-mock-extended';
 import { UserService } from '../user.service';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { UserController } from '../user.controller';
 import { User as UserModel } from '@prisma/client';
 import { BcryptService } from '../bcrypt/bcrypt.service';
