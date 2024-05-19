@@ -12,7 +12,7 @@ export class ParserUtil extends XMLParser {
     }
 
     async getDataAsyncWithOptions(options: ParseOption): Promise<any> {
-        let data;
+        let data: any;
 
         try {
             data = (await axios.get<any>(this.rssUrlHolder.FindUrl(options.target))).data;
