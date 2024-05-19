@@ -7,7 +7,9 @@ import { MkDTO } from '../rss/rss.dto';
 
 @Injectable()
 export class ParserUtil extends XMLParser {
-    private rssUrlHolder = new RssUrlHolder();
+    constructor(private readonly rssUrlHolder: RssUrlHolder) {
+        super();
+    }
 
     async getDataAsyncWithOptions(options: ParseOption): Promise<any> {
         let data;
