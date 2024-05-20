@@ -31,3 +31,19 @@ model Post {
   create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
   authorId  Int?
 }
+
+model Rss {
+  id           Int       @id @default(autoincrement())
+  url          String
+  category     String
+  newspaper    Newspaper @relation(fields: [newspaper_id], references: [id])
+  newspaper_id Int
+  create_at    DateTime  @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+}
+
+model Newspaper {
+  id        Int      @id @default(autoincrement())
+  name      String
+  Rss       Rss[]
+  create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+}

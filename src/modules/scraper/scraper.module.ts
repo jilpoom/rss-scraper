@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ScraperController } from './scraper.controller';
 import { ScraperService } from './scraper.service';
-import { RssUrlHolder } from './rss/rss.url';
-import { ParserUtil } from './util/parser.util';
+import { NewspaperController } from './newspaper/newspaper.controller';
+import { PrismaService } from '../common/prisma/prisma.service';
+import { NewspaperService } from './newspaper/newspaper.service';
+import { NewspaperModule } from './newspaper/newspaper.module';
 
 @Module({
-    providers: [ScraperService, RssUrlHolder, ParserUtil],
-    controllers: [ScraperController],
+    imports: [NewspaperModule],
+    providers: [ScraperService, PrismaService, NewspaperService],
+    controllers: [ScraperController, NewspaperController],
 })
 export class ScraperModule {}
