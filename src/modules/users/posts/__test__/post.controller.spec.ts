@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Post } from '@prisma/client';
 import { PostController } from '../post.controller';
 import { PostService } from '../post.service';
-import { PrismaService } from '../../common/prisma/prisma.service';
 import { DeepMockProxy, mock } from 'jest-mock-extended';
 import { PostCreateDto } from '../post.dto';
+import { PrismaService } from '../../../common/prisma/prisma.service';
 
 describe('PostController - PostService', () => {
     let postController: PostController;
