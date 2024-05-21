@@ -38,9 +38,7 @@ export class NewspaperController {
 
     @Post('/')
     async createNewspaper(@Body() newspaperDTO: NewspaperCreateDTO): Promise<Newspaper> {
-        return this.newspaperService.create({
-            name: newspaperDTO.name,
-        });
+        return this.newspaperService.create(newspaperDTO);
     }
 
     @Post('/rss')

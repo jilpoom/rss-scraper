@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class RSSCreateDTO {
     @ApiProperty()
-    newspaper_id: string | number;
+    newspaper_id: string;
 
     @ApiProperty()
     url: string;

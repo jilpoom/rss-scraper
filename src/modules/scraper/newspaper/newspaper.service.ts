@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { Newspaper, Prisma } from '@prisma/client';
 import { NewspaperUpdateDTO } from './newspaper.dto';
@@ -17,7 +17,7 @@ export class NewspaperService {
         });
 
         if (!newspaper) {
-            throw new Error('해당 신문사가 없습니다');
+            throw new NotFoundException('해당 신문사가 없습니다');
         }
 
         return newspaper;
@@ -30,10 +30,12 @@ export class NewspaperService {
     }
 
     async update(params: NewspaperUpdateDTO) {
-        const { where, data } = params;
+        const { id, ...rest } = params;
         return this.prisma.newspaper.update({
-            data,
-            where,
+            where: {
+                id: +id,
+            },
+            data: rest,
         });
     }
 

@@ -20,6 +20,6 @@ Prisma
 
 | No. | 내용                                                                | 날짜         | 브랜치             | 비고 |
 |-----|-------------------------------------------------------------------|------------|-----------------|----|
-| 0   | [Nest-Fake-API](https://github.com/jilpoom/nest-fake-api) 프로젝트 복제 | 2024-05-19 | master          |    | | 
+| 0   | [Nest-Fake-API](https://github.com/jilpoom/nest-fake-api) 프로젝트 복제 | 2024-05-19 | master          |    |  
 | 1   | `Newspaper`, `RSS` 스키마 생성 및 CRUD 구현                               | 2024-05-20 | feature/scraper |    |
-| 2   | `매일경제` 등록                                                         | 진행중...     | feature/scraper |    |
+| 2   | `NewspaperController` 테스트코드 작성                                    | 2024-05-21 | feature/scraper |    |

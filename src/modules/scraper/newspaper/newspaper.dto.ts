@@ -1,10 +1,14 @@
-import { Prisma } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class NewspaperCreateDTO {
+    @ApiProperty()
     name: string;
 }
 
 export class NewspaperUpdateDTO {
-    where: Prisma.NewspaperWhereUniqueInput;
-    data: Prisma.NewspaperUpdateInput;
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
+    name: string;
 }
