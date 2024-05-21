@@ -6,8 +6,8 @@ import * as morgan from 'morgan';
 import { ValidationPipe } from '@nestjs/common';
 
 const swagger_config = new DocumentBuilder()
-    .setTitle('nest-fake-api')
-    .setDescription('nest-fake-api description')
+    .setTitle('rss-scraper')
+    .setDescription('ko-newspaper rss scraper')
     .setVersion('0.1')
     .addBearerAuth(
         {
