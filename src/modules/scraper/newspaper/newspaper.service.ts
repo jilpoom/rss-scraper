@@ -7,11 +7,11 @@ import { NewspaperUpdateDTO } from './newspaper.dto';
 export class NewspaperService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async findAllNewspapers(): Promise<Newspaper[]> {
+    async newspapers(): Promise<Newspaper[]> {
         return this.prisma.newspaper.findMany({});
     }
 
-    async findOneNewspaper(id: Prisma.NewspaperWhereUniqueInput): Promise<Newspaper> {
+    async newspaper(id: Prisma.NewspaperWhereUniqueInput): Promise<Newspaper> {
         const newspaper = await this.prisma.newspaper.findUnique({
             where: id,
         });
@@ -23,13 +23,13 @@ export class NewspaperService {
         return newspaper;
     }
 
-    async createNewspaper(data: Prisma.NewspaperCreateInput) {
+    async create(data: Prisma.NewspaperCreateInput) {
         return this.prisma.newspaper.create({
             data,
         });
     }
 
-    async updateNewspaper(params: NewspaperUpdateDTO) {
+    async update(params: NewspaperUpdateDTO) {
         const { where, data } = params;
         return this.prisma.newspaper.update({
             data,
@@ -37,7 +37,7 @@ export class NewspaperService {
         });
     }
 
-    async deleteNewspaper(id: Prisma.NewspaperWhereUniqueInput) {
+    async delete(id: Prisma.NewspaperWhereUniqueInput) {
         return this.prisma.newspaper.delete({
             where: id,
         });
