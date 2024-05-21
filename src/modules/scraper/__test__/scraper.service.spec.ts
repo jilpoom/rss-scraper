@@ -6,7 +6,6 @@ describe('ScraperService', () => {
         const data = await axios.get<any>('https://www.mk.co.kr/rss/30100041/');
         const parser = new XMLParser();
         const result = parser.parse(data.data);
-
-        console.log(JSON.stringify(result, null, 4));
+        expect(result).toBeDefined();
     });
 });
