@@ -29,6 +29,12 @@ export class RssService {
         });
     }
 
+    async createMany(data: RSSCreateDTO[]) {
+        return this.prisma.rss.createMany({
+            data,
+        });
+    }
+
     async update(rssUpdateDTO: RSSUpdateDTO) {
         return this.prisma.rss.update({
             where: {

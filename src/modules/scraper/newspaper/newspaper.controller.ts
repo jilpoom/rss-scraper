@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { NewspaperService } from './newspaper.service';
-import { Newspaper, Rss } from '@prisma/client';
+import { Newspaper, Prisma, Rss } from '@prisma/client';
 import { NewspaperCreateDTO, NewspaperUpdateDTO } from './newspaper.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { RssService } from './rss/rss.service';
-import { RSSCreateDTO, RSSUpdateDTO } from './rss/rss.dto';
+import { BulkRSSCreateDTO, RSSCreateDTO, RSSUpdateDTO } from './rss/rss.dto';
 
 @Controller('/newspapers')
 @ApiTags('newspapers')
@@ -44,6 +44,11 @@ export class NewspaperController {
     @Post('/rss')
     async createRss(@Body() rssCreateDTO: RSSCreateDTO): Promise<Rss> {
         return this.rssService.create(rssCreateDTO);
+    }
+
+    @Post('/rss/batch')
+    async createRssBulk(@Body() rssCreateDTOs: BulkRSSCreateDTO): Promise<Prisma.BatchPayload> {
+        return this.rssService.createMany(rssCreateDTOs.data);
     }
 
     @Put('/')
