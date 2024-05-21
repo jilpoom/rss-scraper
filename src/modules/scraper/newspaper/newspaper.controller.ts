@@ -3,11 +3,15 @@ import { NewspaperService } from './newspaper.service';
 import { Newspaper } from '@prisma/client';
 import { NewspaperCreateDTO, NewspaperUpdateDTO } from './newspaper.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { RssService } from './rss/rss.service';
 
 @Controller('/newspapers')
 @ApiTags('newspapers')
 export class NewspaperController {
-    constructor(private readonly newspaperService: NewspaperService) {}
+    constructor(
+        private readonly newspaperService: NewspaperService,
+        private readonly rssService: RssService,
+    ) {}
 
     @Get('')
     async getAllNewspapers(): Promise<Newspaper[]> {
@@ -19,6 +23,11 @@ export class NewspaperController {
         return this.newspaperService.findOneNewspaper({
             id: +id,
         });
+    }
+
+    @Get('/:id/rss')
+    async getAllRssByNewspaper(@Param('id') id: string) {
+        return this.rssService.findAllRssByNewsPaper(+id);
     }
 
     @Post('/')

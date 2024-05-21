@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { Newspaper, Prisma } from '@prisma/client';
 import { NewspaperUpdateDTO } from './newspaper.dto';
+import { RssService } from './rss/rss.service';
 
 @Injectable()
 export class NewspaperService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+    ) {}
 
     async findAllNewspapers(): Promise<Newspaper[]> {
         return this.prisma.newspaper.findMany({});
@@ -39,7 +42,7 @@ export class NewspaperService {
 
     async deleteNewspaper(id: Prisma.NewspaperWhereUniqueInput) {
         return this.prisma.newspaper.delete({
-            where: id
-        })
+            where: id,
+        });
     }
 }
