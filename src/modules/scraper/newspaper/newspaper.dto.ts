@@ -7,7 +7,7 @@ export class NewspaperCreateDTO {
 
 export class NewspaperUpdateDTO {
     @ApiProperty()
-    id: string;
+    id: number;
 
     @ApiProperty()
     name: string;

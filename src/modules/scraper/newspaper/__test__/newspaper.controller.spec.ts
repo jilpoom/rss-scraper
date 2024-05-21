@@ -83,7 +83,7 @@ describe('NewspaperController', () => {
 
     test('createRss', async () => {
         const rssDTO: RSSCreateDTO = {
-            newspaper_id: '1',
+            newspaper_id: 1,
             url: 'http://random.foo.bar',
             category: 'new category',
         };
@@ -95,7 +95,7 @@ describe('NewspaperController', () => {
 
     test('updateNewspaper', async () => {
         const newspaperDTO: NewspaperUpdateDTO = {
-            id: '1',
+            id: 1,
             name: 'updated newspaper name',
         };
 
@@ -106,7 +106,7 @@ describe('NewspaperController', () => {
 
     test('updateRss', async () => {
         const rssDTO: RSSUpdateDTO = {
-            id: '1',
+            id: 1,
             url: 'http://random.foo.bar',
             category: 'updated_category',
         };
