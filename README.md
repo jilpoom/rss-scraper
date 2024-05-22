@@ -25,3 +25,4 @@ Prisma
 | 2   | `NewspaperController` 테스트코드 작성                                    | 2024-05-21 | feature/scraper |    |
 | 3   | 매일경제, YTN, RSS 등록                                                 | 2024-05-21 | feature/scraper |    |
 | 4   | 카카오 메시지 전송 API 연동(나에게 보내기)                                        | 2024-05-22 | feature/kakao   |
+| 5   | 카카오 뉴스 전송                                                         | 2024-05-22 | feature/kakao   |    |
