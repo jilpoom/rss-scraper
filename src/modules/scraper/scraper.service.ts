@@ -22,7 +22,7 @@ export class ScraperService {
 
         const data = await this.request(rss.url);
 
-        return this.parser.parse(data);
+        return this.parser.parse(data).rss.channel;
     }
 
     private async request(url: string): Promise<any> {
