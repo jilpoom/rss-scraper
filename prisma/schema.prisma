@@ -14,12 +14,13 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
   name      String?
-  password  String   @default("0000")
-  create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+  password  String      @default("0000")
+  create_at DateTime    @default(dbgenerated("(DATETIME('now', 'localtime'))"))
   posts     Post[]
+  Subscribe Subscribe[]
 }
 
 model Post {
@@ -33,12 +34,13 @@ model Post {
 }
 
 model Rss {
-  id           Int       @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   url          String
   category     String
-  newspaper    Newspaper @relation(fields: [newspaper_id], references: [id])
+  newspaper    Newspaper   @relation(fields: [newspaper_id], references: [id])
   newspaper_id Int
-  create_at    DateTime  @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+  create_at    DateTime    @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+  Subscribe    Subscribe[]
 }
 
 model Newspaper {
@@ -46,4 +48,14 @@ model Newspaper {
   name      String
   Rss       Rss[]
   create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+}
+
+model Subscribe {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id   Int
+  rss       Rss      @relation(fields: [rss_id], references: [id])
+  rss_id    Int
+  create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
+  cron      String   @default("0 0 12 * * ?")
 }

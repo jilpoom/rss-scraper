@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ScraperModule } from '../scraper/scraper.module';
 import { APP_PIPE } from '@nestjs/core';
 import { SendModule } from '../send/send.module';
+import { SubscribeModule } from '../subscribe/subscribe.module';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { SendModule } from '../send/send.module';
         AuthModule,
         ScraperModule,
         SendModule,
+        SubscribeModule,
     ],
     controllers: [AppController],
     providers: [
