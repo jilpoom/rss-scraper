@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/prisma/prisma.service';
-import { User, Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { BcryptService } from './bcrypt/bcrypt.service';
 import { UserSearchDTO, UserUpdateDTO } from './user.dto';
 
@@ -11,16 +11,10 @@ export class UserService {
         private bcrypt: BcryptService,
     ) {}
 
-    async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User> {
-        const user = await this.prisma.user.findUnique({
+    async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null> {
+        return this.prisma.user.findUnique({
             where: userWhereUniqueInput,
         });
-
-        if (!user) {
-            throw new Error('해당 user가 없습니다.');
-        }
-
-        return user;
     }
 
     async users(params: UserSearchDTO): Promise<User[]> {
