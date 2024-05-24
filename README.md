@@ -26,4 +26,5 @@ Prisma
 | 3   | 매일경제, YTN, RSS 등록                                                 | 2024-05-21 | feature/scraper   |    |
 | 4   | 카카오 메시지 전송 API 연동(나에게 보내기)                                        | 2024-05-22 | feature/kakao     |
 | 5   | 카카오 뉴스 전송                                                         | 2024-05-22 | feature/kakao     |    |
-| 6   | 구독(`Subscribe`) 모델 및 Controller, Service 구현                       | 2024.05.23 | feature/subscribe |    | 
+| 6   | 구독(`Subscribe`) 모델 및 Controller, Service 구현                       | 2024-05-23 | feature/subscribe |    | 
+| 7   | 카카오 OAuth 로그인 및 회원가입 구현 및 Access Token 발급                         | 2024-05-24 | feature/kakao     |    |
