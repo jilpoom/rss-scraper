@@ -17,6 +17,7 @@ describe('UserService', () => {
             name: 'JJY',
             email: 'JJY@google.com',
             password: '1234',
+            provider: 'kakao',
             create_at: new Date(),
         },
         {
@@ -24,6 +25,7 @@ describe('UserService', () => {
             name: 'KKY',
             email: 'KKY@google.com',
             password: '2345',
+            provider: 'rss-scraper',
             create_at: new Date(),
         },
     ];
@@ -55,12 +57,16 @@ describe('UserService', () => {
             expect(user).toStrictEqual(dum[0]);
         });
 
-        test("if user doesn't existed, throw Error", async () => {
+        test("if user doesn't existed, return null", async () => {
             const id = 12345;
 
             prismaServiceMock.user.findUnique.mockResolvedValueOnce(null);
 
-            await expect(userService.user({ id })).rejects.toThrow('해당 user가 없습니다.');
+            expect(
+                await userService.user({
+                    id,
+                }),
+            ).toBe(null);
         });
     });
 

@@ -23,20 +23,25 @@ export class AuthService {
             throw new UnauthorizedException('올바르지 않은 아이디 입니다.');
         }
 
-        const isMatchPassword = await this.bcrypt.compare(signInDTO.password, user[0].password);
-
-        if (!isMatchPassword) {
-            throw new UnauthorizedException('비밀번호가 틀렸습니다.');
-        }
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password, id, ...result } = user[0];
 
         const payload = { sub: id, ...result };
 
+        if (user[0].provider === 'kakao') {
+            return {
+                access_token: await this.jwtService.signAsync(payload),
+            };
+        }
+
+        const isMatchPassword = await this.bcrypt.compare(signInDTO.password, user[0].password);
+
+        if (!isMatchPassword) {
+            throw new UnauthorizedException('비밀번호가 틀렸습니다.');
+        }
+
         return {
             access_token: await this.jwtService.signAsync(payload),
         };
     }
-
-
 }
