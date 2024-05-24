@@ -8,6 +8,7 @@ import { AuthGuard } from '../auth.guard';
 import { BcryptService } from '../../modules/users/bcrypt/bcrypt.service';
 import { JwtModule } from '@nestjs/jwt';
 import { SignInDTO } from '../auth.dto';
+import { KakaoModule } from '../kakao/kakao.module';
 
 describe('AuthController', () => {
     let authController: AuthController;
@@ -22,6 +23,7 @@ describe('AuthController', () => {
                     secret: process.env.JWT_SECRET_KEY,
                     signOptions: { expiresIn: '60s' },
                 }),
+                KakaoModule,
             ],
             controllers: [AuthController],
             providers: [AuthService, UserService, PrismaService, AuthGuard, BcryptService],

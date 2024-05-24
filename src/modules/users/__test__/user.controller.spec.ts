@@ -17,6 +17,7 @@ describe('UserController', () => {
             name: 'JJY',
             email: 'JJY@google.com',
             password: '1234',
+            provider: 'kakao',
             create_at: new Date(),
         },
         {
@@ -24,6 +25,7 @@ describe('UserController', () => {
             name: 'KKY',
             email: 'KKY@google.com',
             password: '2345',
+            provider: 'rss-scraper',
             create_at: new Date(),
         },
     ];

@@ -15,6 +15,8 @@ export class UserCreateDTO {
     @Length(8, 20)
     @ApiProperty()
     password: string;
+
+    provider?: string;
 }
 
 export class UserPasswordChangeDTO {

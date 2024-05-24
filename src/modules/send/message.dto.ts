@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class KakaoSendMessageDTO {
+export class KakaoMessageDTO {
     @ApiProperty()
     access_token: string;
 

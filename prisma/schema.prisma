@@ -21,6 +21,7 @@ model User {
   create_at DateTime    @default(dbgenerated("(DATETIME('now', 'localtime'))"))
   posts     Post[]
   Subscribe Subscribe[]
+  provider  String      @default("rss-scraper")
 }
 
 model Post {
