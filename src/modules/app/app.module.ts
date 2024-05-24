@@ -7,8 +7,9 @@ import { AuthModule } from '../../auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScraperModule } from '../scraper/scraper.module';
 import { APP_PIPE } from '@nestjs/core';
-import { MessageModule } from '../send/message.module';
+import { MessageModule } from '../subscribe/message/message.module';
 import { SubscribeModule } from '../subscribe/subscribe.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { SubscribeModule } from '../subscribe/subscribe.module';
             envFilePath: '/.env',
             isGlobal: true,
         }),
+        ScheduleModule.forRoot(),
         PostModule,
         UserModule,
         AuthModule,
@@ -32,4 +34,5 @@ import { SubscribeModule } from '../subscribe/subscribe.module';
         },
     ],
 })
-export class AppModule {}
+export class AppModule {
+}

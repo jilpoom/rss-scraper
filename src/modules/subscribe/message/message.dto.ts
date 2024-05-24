@@ -5,5 +5,5 @@ export class KakaoMessageDTO {
     access_token: string;
 
     @ApiProperty()
-    text: string;
+    id: number;
 }

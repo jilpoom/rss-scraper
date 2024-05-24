@@ -28,3 +28,4 @@ Prisma
 | 5   | 카카오 뉴스 전송                                                         | 2024-05-22 | feature/kakao     |    |
 | 6   | 구독(`Subscribe`) 모델 및 Controller, Service 구현                       | 2024-05-23 | feature/subscribe |    | 
 | 7   | 카카오 OAuth 로그인 및 회원가입 구현 및 Access Token 발급                         | 2024-05-24 | feature/kakao     |    |
+| 8   | 카카오 알림 기능을 위한 동적 TasksService 구현                                  | 24-05-24   | feature/cron      |

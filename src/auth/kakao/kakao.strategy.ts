@@ -19,6 +19,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
         done: (error: any, user?: any, info?: any) => void,
     ) {
         try {
+            console.log(access_token);
             const { _json } = profile;
 
             const user = await this.userService.user({
