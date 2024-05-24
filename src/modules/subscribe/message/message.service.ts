@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { KakaoMessageDTO } from './message.dto';
-import { ScraperService } from '../scraper/scraper.service';
+import { ScraperService } from '../../scraper/scraper.service';
 
 @Injectable()
 export class MessageService {
@@ -11,7 +11,7 @@ export class MessageService {
 
     async sendKakaoMessageToMe(sendMessageDTO: KakaoMessageDTO) {
         const rss_data = await this.scraperService.getOneRssData({
-            id: 15,
+            id: sendMessageDTO.id,
         });
 
         const data = JSON.stringify({
@@ -65,10 +65,8 @@ export class MessageService {
                     },
                 },
             );
-
             return res.data;
         } catch (e) {
-            console.log(e);
             throw new Error(e.data);
         }
     }
