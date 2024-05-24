@@ -29,9 +29,9 @@ jobs:
 
     - name: Generate Environment Variables
       run: |
-      echo "KAKAO_REST_API_KEY=$KAKAO_REST_API_KEY" >> .env
+       echo "KAKAO_REST_API_KEY=$KAKAO_REST_API_KEY" >> .env
       env: 
-        KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+         KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
 
     - run: npm ci
     - run: npm run build --if-present
