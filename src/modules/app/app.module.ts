@@ -10,6 +10,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { MessageModule } from '../subscribe/message/message.module';
 import { SubscribeModule } from '../subscribe/subscribe.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
     imports: [
@@ -18,6 +19,9 @@ import { ScheduleModule } from '@nestjs/schedule';
             isGlobal: true,
         }),
         ScheduleModule.forRoot(),
+        CacheModule.register({
+            isGlobal: true,
+        }),
         PostModule,
         UserModule,
         AuthModule,
@@ -34,5 +38,4 @@ import { ScheduleModule } from '@nestjs/schedule';
         },
     ],
 })
-export class AppModule {
-}
+export class AppModule {}

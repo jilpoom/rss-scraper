@@ -6,6 +6,7 @@ import { TasksService } from '../common/tasks/tasks.service';
 import { MessageService } from './message/message.service';
 import { ScraperService } from '../scraper/scraper.service';
 import { XMLParser } from 'fast-xml-parser';
+import { KakaoService } from '../../auth/kakao/kakao.service';
 
 @Module({
     providers: [
@@ -15,6 +16,7 @@ import { XMLParser } from 'fast-xml-parser';
         MessageService,
         ScraperService,
         XMLParser,
+        KakaoService,
     ],
     controllers: [SubscribeController],
 })
