@@ -9,6 +9,7 @@ import { BcryptService } from '../../modules/users/bcrypt/bcrypt.service';
 import { JwtModule } from '@nestjs/jwt';
 import { SignInDTO } from '../auth.dto';
 import { KakaoModule } from '../kakao/kakao.module';
+import { CacheModule } from '@nestjs/cache-manager';
 
 describe('AuthController', () => {
     let authController: AuthController;
@@ -24,6 +25,9 @@ describe('AuthController', () => {
                     signOptions: { expiresIn: '60s' },
                 }),
                 KakaoModule,
+                CacheModule.register({
+                    isGlobal: true,
+                }),
             ],
             controllers: [AuthController],
             providers: [AuthService, UserService, PrismaService, AuthGuard, BcryptService],
