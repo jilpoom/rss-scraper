@@ -2,14 +2,18 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { KakaoMessageDTO } from './message.dto';
 import { ScraperService } from '../../scraper/scraper.service';
+import { KakaoService } from '../../../auth/kakao/kakao.service';
 
 @Injectable()
 export class MessageService {
     private KAKAO_SEND_MESSAGE_URL = 'https://kapi.kakao.com/v2/api/talk/memo/default/send';
 
-    constructor(private readonly scraperService: ScraperService) {}
+    constructor(
+        private readonly scraperService: ScraperService,
+        private readonly kakaoService: KakaoService,
+    ) {}
 
-    async sendKakaoMessageToMe(sendMessageDTO: KakaoMessageDTO) {
+    async sendKakaoMessageToMe(sendMessageDTO: KakaoMessageDTO, user_id: number) {
         const rss_data = await this.scraperService.getOneRssData({
             id: sendMessageDTO.id,
         });
@@ -52,8 +56,10 @@ export class MessageService {
             ],
         });
 
+        let res;
+
         try {
-            const res = await axios.post(
+            res = await axios.post(
                 this.KAKAO_SEND_MESSAGE_URL,
                 {
                     template_object: data,
@@ -65,9 +71,10 @@ export class MessageService {
                     },
                 },
             );
-            return res.data;
         } catch (e) {
-            throw new Error(e.data);
+            throw new Error(e.message);
         }
+
+        return res.data;
     }
 }

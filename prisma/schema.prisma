@@ -22,6 +22,7 @@ model User {
   posts     Post[]
   Subscribe Subscribe[]
   provider  String      @default("rss-scraper")
+  Token     Token[]
 }
 
 model Post {
@@ -59,4 +60,11 @@ model Subscribe {
   rss_id    Int
   create_at DateTime @default(dbgenerated("(DATETIME('now', 'localtime'))"))
   cron      String   @default("0 0 12 * * ?")
+}
+
+model Token {
+  id            Int    @id @default(autoincrement())
+  user          User   @relation(fields: [user_id], references: [id])
+  user_id       Int
+  refresh_token String
 }
