@@ -27,6 +27,8 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
         done: (error: any, user?: any, info?: any) => void,
     ) {
         try {
+            console.log(profile);
+
             const { _json } = profile;
 
             const user = await this.userService.user({
@@ -60,6 +62,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
                 email: _json.kakao_account.email,
                 name: _json.properties.nickname,
                 provider: 'kakao',
+                password: '0000',
             });
 
             const key = `kakao_token:` + newUser.id;
