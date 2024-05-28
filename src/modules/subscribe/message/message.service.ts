@@ -3,7 +3,6 @@ import axios from 'axios';
 import { KakaoMessageDTO } from './message.dto';
 import { ScraperService } from '../../scraper/scraper.service';
 import { KakaoService } from '../../../auth/kakao/kakao.service';
-import { TokenExpiredError } from '@nestjs/jwt';
 
 @Injectable()
 export class MessageService {
@@ -63,12 +62,12 @@ export class MessageService {
             // Access Token Validate
             await this.kakaoService.kakaoUserInfo(sendMessageDTO.access_token);
         } catch (e) {
-            if (e instanceof TokenExpiredError) {
+            try {
                 sendMessageDTO.access_token = (
                     await this.kakaoService.kakaoReauth(user_id)
                 ).access_token;
-            } else {
-                throw new Error('예기치 못한 오류가 발생했습니다.');
+            } catch (e) {
+                throw new Error('재 로그인이 필요합니다.');
             }
         } finally {
             res = await axios.post(

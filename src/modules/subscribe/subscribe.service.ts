@@ -71,26 +71,19 @@ export class SubscribeService implements OnModuleInit {
     }
 
     async onModuleInit() {
-        const subscribes = await this.prisma.subscribe.findMany({
-            select: {
-                user_id: true,
-                rss_id: true,
-                cron: true,
-            },
+        const subscribes = await this.prisma.subscribe.findMany({});
+
+        subscribes.forEach((subscribe) => {
+            console.log(subscribe);
+            this.cron.addJob(subscribe.id + '', subscribe.cron, async () => {
+                await this.messageService.sendKakaoMessageToMe(
+                    {
+                        access_token: '',
+                        id: subscribe.rss_id,
+                    },
+                    subscribe.user_id,
+                );
+            });
         });
-
-        console.log(subscribes);
-
-        const tokens = await this.prisma.token.findMany({
-            where: {
-                user_id: {
-                    in: subscribes.map((s) => s.user_id),
-                },
-            },
-        });
-
-        console.log(tokens);
-
-        return;
     }
 }
