@@ -14,7 +14,7 @@ export class TasksService {
             this.schedulerRegistry.addCronJob(job_name, job);
             job.start();
 
-            console.log('job added');
+            console.log(`ADD CRON JOB : [${job_name}]`);
         } catch (e) {
             throw new BadRequestException(e.message);
         }
