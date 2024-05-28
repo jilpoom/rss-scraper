@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ReverseParseCronDTO } from '../common/tasks/tasks.dto';
 
 export class SubscribeCreateDTO {
     @ApiProperty()
@@ -7,8 +8,10 @@ export class SubscribeCreateDTO {
     @ApiProperty()
     rss_id: number;
 
-    @ApiProperty()
-    cron: string;
+    @ApiProperty({
+        type: ReverseParseCronDTO,
+    })
+    cron: ReverseParseCronDTO;
 }
 
 export class BulkSubscribeCreateDTO {
@@ -28,6 +31,8 @@ export class SubscribeUpdateDTO {
     @ApiProperty()
     rss_id: number;
 
-    @ApiProperty()
-    cron: string;
+    @ApiProperty({
+        type: ReverseParseCronDTO,
+    })
+    cron: ReverseParseCronDTO;
 }

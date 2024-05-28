@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Response } from 'express';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { PrismaService } from '../../modules/common/prisma/prisma.service';
 
 @Injectable()
@@ -32,10 +32,14 @@ export class KakaoService {
             refresh_token: refresh_token[0].refresh_token,
         };
 
-        let response;
+        let response: AxiosResponse<any, any>;
 
         try {
-            response = await axios.post(this.KAKAO_REAUTH_TOKEN_URL, data);
+            response = await axios.post(this.KAKAO_REAUTH_TOKEN_URL, data, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+                },
+            });
         } catch (e) {
             throw new Error(e.message);
         }
@@ -43,7 +47,7 @@ export class KakaoService {
         return response.data;
     }
 
-    private async kakaoUserInfo(kakao_access_token: string) {
+    async kakaoUserInfo(kakao_access_token: string) {
         const response = await axios.get<any>(this.KAKAO_USER_INFO_URL, {
             headers: {
                 Authorization: 'Bearer ' + kakao_access_token,

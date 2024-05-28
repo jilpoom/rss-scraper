@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
 import * as console from 'node:console';
+import { ReverseParseCronDTO } from './tasks.dto';
 
 @Injectable()
 export class TasksService {
@@ -21,5 +22,9 @@ export class TasksService {
 
     async deleteJob(job_name: string) {
         this.schedulerRegistry.deleteCronJob(job_name);
+    }
+
+    reverseParseCron({ minutes, hours }: ReverseParseCronDTO) {
+        return `${minutes} ${hours} * * *`;
     }
 }
