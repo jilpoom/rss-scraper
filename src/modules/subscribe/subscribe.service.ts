@@ -25,7 +25,13 @@ export class SubscribeService {
 
     async insertSubscribes(subscribeDTOs: BulkSubscribeCreateDTO) {
         await this.prisma.subscribe.createMany({
-            data: subscribeDTOs.subscribes,
+            data: subscribeDTOs.subscribes.map((subscribe) => {
+                const { cron, ...rest } = subscribe;
+                return {
+                    cron: this.cron.reverseParseCron(cron),
+                    ...rest,
+                };
+            }),
         });
 
         const subscribes = await this.subscribesByUser(subscribeDTOs.subscribes[0].user_id);
@@ -41,7 +47,7 @@ export class SubscribeService {
                 id: subscribe.rss_id,
             };
 
-            this.cron.addJob(subscribe.id + '', '0/30 * * * * 1-7', async () => {
+            this.cron.addJob(subscribe.id + '', subscribe.cron, async () => {
                 await this.messageService.sendKakaoMessageToMe(messageDTO, subscribe.user_id);
             });
         });
@@ -56,7 +62,11 @@ export class SubscribeService {
             where: {
                 id,
             },
-            data: rest,
+            data: {
+                cron: this.cron.reverseParseCron(rest.cron),
+                user_id: rest.user_id,
+                rss_id: rest.rss_id,
+            },
         });
     }
 }
