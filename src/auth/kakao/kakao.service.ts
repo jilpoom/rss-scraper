@@ -6,7 +6,7 @@ import { PrismaService } from '../../modules/common/prisma/prisma.service';
 @Injectable()
 export class KakaoService {
     private HOST = process.env.HOST!;
-    private KAKAO_REDIRECT_URI = `${this.HOST}/auths/kakao/authorize`;
+    private KAKAO_REDIRECT_URI = `${this.HOST}/login/auth`;
     private KAKAO_REST_API_KEY = process.env.KAKAO_REST_API_KEY!;
     private KAKAO_AUTHORIZE_URL = 'https://kauth.kakao.com/oauth/authorize';
     private KAKAO_USER_INFO_URL = 'https://kapi.kakao.com/v2/user/me';

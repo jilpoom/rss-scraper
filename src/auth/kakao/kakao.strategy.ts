@@ -16,7 +16,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
     ) {
         super({
             clientID: process.env.KAKAO_REST_API_KEY,
-            callbackURL: `${process.env.HOST}/auths/kakao/authorize`,
+            callbackURL: `${process.env.HOST}/login/auth`,
         });
     }
 
