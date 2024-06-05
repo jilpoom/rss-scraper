@@ -24,6 +24,9 @@ const swagger_config = new DocumentBuilder()
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
+    // Global Prefix
+    app.setGlobalPrefix('v1');
+
     // CORS
     app.enableCors();
 

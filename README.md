@@ -31,3 +31,4 @@ Prisma
 | 8   | 카카오 알림 기능을 위한 동적 TasksService 구현                                  | 2024-05-24 | feature/cron          |
 | 9   | 카카오 유저 Token 캐싱                                                   | 2024-05-25 | feature/cache-manager |    |
 | 10  | Cron Parser 및 kakao Access Token 만료 시, 자동 갱신                      | 2024-05-28 | feature/cron-parser   |
+| 11  | API 버저닝 및 Subscirbe 응답 데이터에 RSS, Newspaper 추가                     | 2024-06-05 | feature/subscribe     |    |

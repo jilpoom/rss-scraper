@@ -20,6 +20,13 @@ export class SubscribeService implements OnModuleInit {
             where: {
                 user_id,
             },
+            include: {
+                rss: {
+                    include: {
+                        newspaper: true,
+                    },
+                },
+            },
         });
     }
 
