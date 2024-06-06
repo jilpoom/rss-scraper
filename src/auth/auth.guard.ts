@@ -9,15 +9,13 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
 
-        console.log(token);
-
         if (!token) {
             throw new UnauthorizedException();
         }
 
         try {
             request.user = await this.jwtService.verifyAsync(token, {
-                secret: process.env.JWT_SECRET_KEY,
+                secret: process.env.JWT_TOKEN_SECRET_KEY,
             });
         } catch {
             throw new UnauthorizedException();

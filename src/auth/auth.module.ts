@@ -12,8 +12,6 @@ import { KakaoModule } from './kakao/kakao.module';
     imports: [
         JwtModule.register({
             global: true,
-            secret: process.env.JWT_SECRET_KEY,
-            signOptions: { expiresIn: '3600s' },
         }),
         KakaoModule,
     ],
