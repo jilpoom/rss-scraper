@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './auth.guard';
 import { BcryptService } from '../modules/users/bcrypt/bcrypt.service';
 import { KakaoModule } from './kakao/kakao.module';
+import { CustomConfigService } from '../config/custom-config.service';
 
 @Module({
     imports: [
@@ -16,6 +17,13 @@ import { KakaoModule } from './kakao/kakao.module';
         KakaoModule,
     ],
     controllers: [AuthController],
-    providers: [AuthService, UserService, PrismaService, AuthGuard, BcryptService],
+    providers: [
+        AuthService,
+        UserService,
+        PrismaService,
+        AuthGuard,
+        BcryptService,
+        CustomConfigService,
+    ],
 })
 export class AuthModule {}

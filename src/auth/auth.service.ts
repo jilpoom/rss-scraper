@@ -3,18 +3,16 @@ import { UserService } from '../modules/users/user.service';
 import { SignInDTO } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { BcryptService } from '../modules/users/bcrypt/bcrypt.service';
+import { CustomConfigService } from '../config/custom-config.service';
 
 @Injectable()
 export class AuthService {
-    private ACCESS_TOKEN_SECRET_KEY = process.env.JWT_TOKEN_SECRET_KEY;
-    private ACCESS_TOKEN_EXPIRES_IN = process.env.JWT_TOKEN_EXPIRES_IN;
-    private REFRESH_TOKEN_SECRET_KEY = process.env.JWT_REFRESH_TOKEN_SECRET_KEY;
-    private REFRESH_TOKEN_EXPIRES_IN = process.env.JWT_REFRESH_TOKEN_EXPIRES_IN;
 
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService,
         private readonly bcrypt: BcryptService,
+        private readonly config: CustomConfigService,
     ) {}
 
     async signIn(signInDTO: SignInDTO): Promise<{ access_token: string; refresh_token: string }> {
@@ -53,18 +51,21 @@ export class AuthService {
     }
 
     private async getAccessToken(payload) {
+        const { access_token_secret_key, access_token_expires_in } = this.config.getJwtConfig();
+
         return this.jwtService.signAsync(payload, {
-            secret: this.ACCESS_TOKEN_SECRET_KEY,
-            expiresIn: this.ACCESS_TOKEN_EXPIRES_IN,
+            secret: access_token_secret_key,
+            expiresIn: access_token_expires_in,
         });
     }
 
     private async getRefreshToken() {
+        const { refresh_token_secret_key, refresh_token_expires_in } = this.config.getJwtConfig();
         return this.jwtService.signAsync(
             {},
             {
-                secret: this.REFRESH_TOKEN_SECRET_KEY,
-                expiresIn: this.REFRESH_TOKEN_EXPIRES_IN,
+                secret: refresh_token_secret_key,
+                expiresIn: refresh_token_expires_in,
             },
         );
     }

@@ -11,6 +11,7 @@ import { MessageModule } from '../subscribe/message/message.module';
 import { SubscribeModule } from '../subscribe/subscribe.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
+import { CustomConfigService } from '../../config/custom-config.service';
 
 @Module({
     imports: [
