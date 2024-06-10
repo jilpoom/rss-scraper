@@ -6,12 +6,13 @@ import { UserModule } from '../users/user.module';
 import { AuthModule } from '../../auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ScraperModule } from '../scraper/scraper.module';
-import { APP_PIPE } from '@nestjs/core';
+import {APP_GUARD, APP_PIPE} from '@nestjs/core';
 import { MessageModule } from '../subscribe/message/message.module';
 import { SubscribeModule } from '../subscribe/subscribe.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CacheModule } from '@nestjs/cache-manager';
 import { CustomConfigService } from '../../config/custom-config.service';
+import {AuthGuard} from "../../auth/auth.guard";
 
 @Module({
     imports: [
@@ -36,6 +37,10 @@ import { CustomConfigService } from '../../config/custom-config.service';
         {
             provide: APP_PIPE,
             useClass: ValidationPipe,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
         },
     ],
 })

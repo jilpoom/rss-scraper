@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.guard';
 import { BcryptService } from '../modules/users/bcrypt/bcrypt.service';
 import { KakaoModule } from './kakao/kakao.module';
 import { CustomConfigService } from '../config/custom-config.service';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
     imports: [
