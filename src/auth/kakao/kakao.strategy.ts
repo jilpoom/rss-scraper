@@ -27,8 +27,6 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
         done: (error: any, user?: any, info?: any) => void,
     ) {
         try {
-            console.log(profile);
-
             const { _json } = profile;
 
             const user = await this.userService.user({
@@ -43,7 +41,6 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
                     refresh_token: refreshToken,
                 };
                 await this.cacheManager.set(key, JSON.stringify(value), this.CACHE_TTL);
-                console.log(await this.cacheManager.get(key));
 
                 await this.prisma.token.updateMany({
                     where: {

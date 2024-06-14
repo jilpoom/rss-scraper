@@ -8,29 +8,36 @@ import { AuthGuard } from '../auth.guard';
 import { BcryptService } from '../../modules/users/bcrypt/bcrypt.service';
 import { JwtModule } from '@nestjs/jwt';
 import { SignInDTO } from '../auth.dto';
-import { KakaoModule } from '../kakao/kakao.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { CustomConfigService } from '../../config/custom-config.service';
+import { ConfigService } from '@nestjs/config';
 
 describe('AuthController', () => {
     let authController: AuthController;
     const authServiceMock: DeepMockProxy<AuthService> = mock<AuthService>();
     const access_token = 'RandomString';
+    const refresh_token = 'RandomString';
 
     beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             imports: [
                 JwtModule.register({
                     global: true,
-                    secret: process.env.JWT_SECRET_KEY,
-                    signOptions: { expiresIn: '60s' },
                 }),
-                KakaoModule,
                 CacheModule.register({
                     isGlobal: true,
                 }),
             ],
             controllers: [AuthController],
-            providers: [AuthService, UserService, PrismaService, AuthGuard, BcryptService],
+            providers: [
+                AuthService,
+                UserService,
+                PrismaService,
+                AuthGuard,
+                BcryptService,
+                CustomConfigService,
+                ConfigService,
+            ],
         })
             .overrideProvider(AuthService)
             .useValue(authServiceMock)
@@ -40,7 +47,7 @@ describe('AuthController', () => {
     });
 
     test('signIn', async () => {
-        authServiceMock.signIn.mockResolvedValueOnce({ access_token });
+        authServiceMock.signIn.mockResolvedValueOnce({ access_token, refresh_token });
 
         const userLoginDTO: SignInDTO = {
             email: 'name@google.com',
@@ -49,6 +56,6 @@ describe('AuthController', () => {
 
         const result = await authController.signIn(userLoginDTO);
 
-        expect(result).toStrictEqual({ access_token });
+        expect(result).toStrictEqual({ access_token, refresh_token });
     });
 });

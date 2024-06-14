@@ -6,6 +6,7 @@ import { PrismaService } from '../../modules/common/prisma/prisma.service';
 import { BcryptService } from '../../modules/users/bcrypt/bcrypt.service';
 import { KakaoStrategy } from './kakao.strategy';
 import { AuthService } from '../auth.service';
+import { CustomConfigService } from '../../config/custom-config.service';
 
 @Module({
     providers: [
@@ -15,6 +16,7 @@ import { AuthService } from '../auth.service';
         BcryptService,
         KakaoStrategy,
         AuthService,
+        CustomConfigService,
     ],
     controllers: [KakaoController],
 })

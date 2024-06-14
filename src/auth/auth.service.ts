@@ -3,16 +3,19 @@ import { UserService } from '../modules/users/user.service';
 import { SignInDTO } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { BcryptService } from '../modules/users/bcrypt/bcrypt.service';
+import { CustomConfigService } from '../config/custom-config.service';
 
 @Injectable()
 export class AuthService {
+
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService,
         private readonly bcrypt: BcryptService,
+        private readonly config: CustomConfigService,
     ) {}
 
-    async signIn(signInDTO: SignInDTO): Promise<{ access_token: string }> {
+    async signIn(signInDTO: SignInDTO): Promise<{ access_token: string; refresh_token: string }> {
         const user = await this.userService.users({
             where: {
                 email: { contains: signInDTO.email },
@@ -30,7 +33,8 @@ export class AuthService {
 
         if (user[0].provider === 'kakao') {
             return {
-                access_token: await this.jwtService.signAsync(payload),
+                access_token: await this.getAccessToken(payload),
+                refresh_token: await this.getRefreshToken(),
             };
         }
 
@@ -41,7 +45,28 @@ export class AuthService {
         }
 
         return {
-            access_token: await this.jwtService.signAsync(payload),
+            access_token: await this.getAccessToken(payload),
+            refresh_token: await this.getRefreshToken(),
         };
+    }
+
+    private async getAccessToken(payload) {
+        const { access_token_secret_key, access_token_expires_in } = this.config.getJwtConfig();
+
+        return this.jwtService.signAsync(payload, {
+            secret: access_token_secret_key,
+            expiresIn: access_token_expires_in,
+        });
+    }
+
+    private async getRefreshToken() {
+        const { refresh_token_secret_key, refresh_token_expires_in } = this.config.getJwtConfig();
+        return this.jwtService.signAsync(
+            {},
+            {
+                secret: refresh_token_secret_key,
+                expiresIn: refresh_token_expires_in,
+            },
+        );
     }
 }
